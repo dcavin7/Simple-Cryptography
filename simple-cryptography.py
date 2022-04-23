@@ -5,14 +5,14 @@
 alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 def backwards(text): 
-    # Reverses string
+    """Reverses a string."""
     result = ""
     for i in range(len(text) - 1, -1, -1):
         result += text[i]
     return result
 
 def shift(text, amount = 1, direction = "left"): 
-    # Shifts a string either left or right by a given number of characters
+    """ Shifts a string either left or right by a given number of characters. """
     if (direction.lower() == "left") or (direction.lower() == "l"):
         modifier = amount
     elif (direction.lower() == "right") or (direction.lower() == "r"):
@@ -31,7 +31,7 @@ def shift(text, amount = 1, direction = "left"):
 # Cipher types
 
 def caesar(message, shift_amt = 1, direction = "left"):
-    # Cipher using shifted alphabet
+    """Substitution cipher using shifted alphabet."""
     shifted_alphabet = shift(alphabet, shift_amt, direction)
     message = message.upper()
     result = ""
@@ -45,7 +45,7 @@ def caesar(message, shift_amt = 1, direction = "left"):
     return result
 
 def atbash(message):
-    # Cipher using reversed alphabet
+    """Substitution cipher using reversed alphabet."""
     backwards_alphabet = backwards(alphabet)
     message = message.upper()
     result = ""
@@ -62,15 +62,20 @@ def atbash(message):
 # Extras
 
 def brute_force_caesar(message):
+    """Runs a string through all possible Caesar cipher shifts."""
     # Et tu, Brute (force)?
     for shift_amt in range(26):
         print("Shift: left,", shift_amt)
         print(caesar(message, shift_amt),"\n")
 
+# Tests - Uncomment as needed
+# print(atbash("test"))
+# print(caesar("test"))
+# print(brute_force_caesar("test"))
 
-brute_force_caesar("caesar test.")
 
 # Ideas for future functions:
+# - Scytale
 # - Polyalphabetic ciphers
 # - Polygraphic substitution
 # - One-time pad
