@@ -2,6 +2,9 @@
 
 # Setup
 
+import math
+import numpy as np
+
 alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 def backwards(text): 
@@ -12,7 +15,7 @@ def backwards(text):
     return result
 
 def shift(text, amount = 1, direction = "left"): 
-    """ Shifts a string either left or right by a given number of characters. """
+    """Shifts a string either left or right by a given number of characters."""
     if (direction.lower() == "left") or (direction.lower() == "l"):
         modifier = amount
     elif (direction.lower() == "right") or (direction.lower() == "r"):
@@ -28,7 +31,9 @@ def shift(text, amount = 1, direction = "left"):
     return new_string
 
 
-# Cipher types
+# CIPHER TYPES
+
+# Substitution ciphers
 
 def caesar(message, shift_amt = 1, direction = "left"):
     """Substitution cipher using shifted alphabet."""
@@ -58,6 +63,43 @@ def atbash(message):
 
     return result
 
+# Transposition ciphers
+
+def scytale(message, encrypt = True, chars_around = 4, print_matrix = False):
+    """Transposition cipher. Simulates writing on a strip of parchment
+    wound around a rod, then reading the parchment after it is unwound."""
+
+    # WORK IN PROGRESS
+
+    message = message.upper()
+
+    message_length = len(message)
+    if encrypt == True:
+        num_rows = chars_around
+        num_cols = math.ceil(message_length/chars_around)
+    else:
+        num_cols = chars_around
+        num_rows = math.ceil(message_length/chars_around)
+    
+    text_matrix = np.empty((num_rows, num_cols), dtype = "object")
+    
+    for j in range(num_rows):
+        for i in range(num_cols):
+            try:
+                text_matrix[j, i] = message[(j*num_cols) + i]
+            except IndexError:
+                text_matrix[j, i] = ""
+
+    if print_matrix == True:
+        print(text_matrix)
+    
+    result_string = ""
+
+    for j in range(num_cols):
+        for i in range(num_rows):
+            result_string += text_matrix[i, j]
+
+    return result_string
 
 # Extras
 
@@ -71,7 +113,8 @@ def brute_force_caesar(message):
 # Tests - Uncomment as needed
 # print(atbash("test"))
 # print(caesar("test"))
-# print(brute_force_caesar("test"))
+# brute_force_caesar("test")
+# print(scytale("this is a test"))
 
 
 # Ideas for future functions:
