@@ -30,7 +30,6 @@ def shift(text, amount = 1, direction = "left"):
 
     return new_string
 
-
 # CIPHER TYPES
 
 # Substitution ciphers
