@@ -105,19 +105,24 @@ def scytale(message, encrypt = True, chars_around = 4, print_matrix = False):
 def brute_force_caesar(message):
     """Runs a string through all possible Caesar cipher shifts."""
     # Et tu, Brute (force)?
+    bfc_result = ""
     for shift_amt in range(26):
-        print("Shift: left,", shift_amt)
-        print(caesar(message, shift_amt),"\n")
+        bfc_result += "Shifted left, "
+        bfc_result += str(shift_amt)
+        bfc_result += ": "
+        bfc_result += caesar(message, shift_amt)
+        bfc_result += "\n"
+    return bfc_result
 
 # Tests - Uncomment as needed
 # print(atbash("test"))
 # print(caesar("test"))
-# brute_force_caesar("test")
+# print(brute_force_caesar("test"))
 # print(scytale("this is a test"))
 
 
+
 # Ideas for future functions:
-# - Scytale
 # - Polyalphabetic ciphers
 # - Polygraphic substitution
 # - One-time pad
